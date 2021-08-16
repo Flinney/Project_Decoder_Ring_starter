@@ -16,7 +16,7 @@ const caesarModule = (function () {
     if (!encode) {
       shift *= -1
     }
-    for (let i = 0; i < input.length; i++) {
+    for (const i = 0; i < input.length; i++) {
       const currentIdx = alpha.indexOf(input[i].toLowerCase())
       if (currentIdx === -1) {
         answerStr += input[i]
