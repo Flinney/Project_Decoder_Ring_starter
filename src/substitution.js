@@ -5,6 +5,19 @@
 
 const substitutionModule = (function () {
   // you can add any code you want within this function scope
+  function isValid(alpha) {
+    if (alpha.length != 26) {
+      return false
+    }
+    const checkSet = new Set()
+    for (char of alpha) {
+      if (checkSet.has(char)) {
+        return false
+      }
+      checkSet.add(char)
+    }
+    return true
+  }
 
   function substitution(input, alphabet, encode = true) {
     // your solution code here
@@ -15,4 +28,6 @@ const substitutionModule = (function () {
   };
 })();
 
-module.exports = { substitution: substitutionModule.substitution };
+module.exports = {
+  substitution: substitutionModule.substitution
+};
