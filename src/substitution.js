@@ -5,22 +5,40 @@
 
 const substitutionModule = (function () {
   // you can add any code you want within this function scope
+  const orderedAlpha = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
   function isValid(alpha) {
-    if (alpha.length != 26) {
-      return false
+    return alpha && alpha.length == 26 &&
+      (new Set(alpha)).size == 26
+  }
+
+  function encodeChar(char, alphabet) {
+    if (!orderedAlpha.includes(char)) {
+      return char
     }
-    const checkSet = new Set()
-    for (char of alpha) {
-      if (checkSet.has(char)) {
-        return false
-      }
-      checkSet.add(char)
+    const targetIdx = orderedAlpha.indexOf(char.toLowerCase())
+    return alphabet[targetIdx]
+  }
+
+  function decodeChar(char, alphabet) {
+    if (char === " ") {
+      return char
     }
-    return true
+    const targetIdx = alphabet.indexOf(char)
+    return orderedAlpha[targetIdx]
   }
 
   function substitution(input, alphabet, encode = true) {
     // your solution code here
+    if (!isValid(alphabet)) {
+      return false
+    }
+    let answerStr = ''
+    const codec = encode ? encodeChar : decodeChar
+    for (const char of input) {
+      answerStr += codec(char, alphabet)
+    }
+    return answerStr
   }
 
   return {
