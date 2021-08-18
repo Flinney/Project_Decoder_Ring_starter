@@ -5,13 +5,15 @@
 
 const substitutionModule = (function () {
   // you can add any code you want within this function scope
+  //create alphabetical list including capitals to reference for idx
   const orderedAlpha = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-
+  // helper function that tests if substitution string is valid. Uses Set object to check for uniques
   function isValid(alpha) {
     return alpha && alpha.length == 26 &&
       (new Set(alpha)).size == 26
   }
-
+  // Helper function that encodes a single character, matching index of alphabet to index of substitution.
+  // If the character is a space or special character, it will simply return that character
   function encodeChar(char, alphabet) {
     if (!orderedAlpha.includes(char)) {
       return char
@@ -19,7 +21,8 @@ const substitutionModule = (function () {
     const targetIdx = orderedAlpha.indexOf(char.toLowerCase())
     return alphabet[targetIdx]
   }
-
+  // Helper function that decodes a single character, matching index of substitution with idx of alphabet
+  // If the character is a space, the space is returned
   function decodeChar(char, alphabet) {
     if (char === " ") {
       return char
@@ -29,13 +32,18 @@ const substitutionModule = (function () {
   }
 
   function substitution(input, alphabet, encode = true) {
-    // your solution code here
+    // First checks for valid substitution with early return if not valid
     if (!isValid(alphabet)) {
       return false
     }
+    //creat answer str after making check (Saves memory)
     let answerStr = ''
+    //determine which helper function to use, assigning to codec var
     const codec = encode ? encodeChar : decodeChar
+    //loop over characters within input.
     for (const char of input) {
+      //Execute helper function on each individual character and push the result to answer string.
+      //Big O time is increased, but orderedAlpha and substitution are at most 52 characters long.
       answerStr += codec(char, alphabet)
     }
     return answerStr
