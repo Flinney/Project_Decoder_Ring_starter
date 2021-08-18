@@ -5,6 +5,7 @@
 
 const polybiusModule = (function () {
   // you can add any code you want within this function scope
+  //Create cipher object linking unique number to letter
   const cipher = {
     11: 'a',
     21: 'b',
@@ -32,19 +33,26 @@ const polybiusModule = (function () {
     45: 'y',
     55: 'z'
   }
+  //create array of keys and values using object. Push separate key value pairs for i and j for reference.
   const cipherArr = Object.entries(cipher)
   cipherArr.push([42, 'i'])
   cipherArr.push([42, 'j'])
 
 
   function polybius(input, encode = true) {
-    // your solution code here
+    // Create count of input characters, not including spaces. Also create answer string
     const nonSpaceCharCount = input.split(' ').reduce((acc, ele) => acc += ele.length, 0)
     let answerStr = ''
+    // Checking for proper decode string with early return 
     if (!encode && nonSpaceCharCount % 2 != 0) {
       return false
     } else if (!encode) {
+      // If decoding, creates a key string to look up in cipher object
       let cipherKey = ''
+      // Loops over characters in input. If space, pushes space to answer. If not, pushes number to key 
+      //string. If it's the second digit in key string, the key stings is converted to a number, and 
+      //referenced in cipher object to access proper letter to add to answer string. Resets key string 
+      //for next iteration
       for (const char of input) {
         if (char === ' ') {
           answerStr += char
@@ -58,6 +66,8 @@ const polybiusModule = (function () {
       }
       return answerStr
     } else {
+      // If encoding, pushes space to answer first, then filters through cipher array for key/value
+      // subarray that has the character to encode. Then pushes corresponding number to answer string
       for (char of input) {
         if (char === ' ') {
           answerStr += char
