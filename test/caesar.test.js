@@ -4,7 +4,7 @@ const caesar = require("../src/caesar")
 
 
 
-describe("caesar", () => {
+describe("caesar()", () => {
     it("Should return false if shift is 0", () => {
         const actual = caesar.caesar("Thinkful", 0);
         expect(actual).to.be.false

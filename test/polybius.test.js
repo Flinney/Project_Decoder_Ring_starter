@@ -2,7 +2,7 @@
 const expect = require("chai").expect;
 const polybius = require("../src/polybius");
 
-describe("polybius", () => {
+describe("polybius()", () => {
     it("should leave spaces as is", () => {
         const expected = "hello world";
         const actual = polybius.polybius("3251131343 2543241341", false)
