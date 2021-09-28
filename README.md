@@ -18,4 +18,4 @@ If given a valid substitution alphabet, the cipher will encode or decode a given
 
 ## Start
 
-Run `npm start` to see the project in a local env. This project is not deployed currently.
+Run `npm install` and `npm start` to see the project in a local env. This project is not deployed currently.
